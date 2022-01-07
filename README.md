@@ -1,4 +1,6 @@
-stm32-projects
+STM32 Projects
 ==============
 
-Small projects for STM32 platform
+Small test projects for STM32 platform
+
+* [Blink](blink)
