@@ -35,7 +35,7 @@ TwoWire Wire1(PB6, PB7);
 // On an arduino LEONARDO:   2(SDA),  3(SCL), ...
 #define OLED_RESET 4        // Reset pin # (or -1 if sharing Arduino reset pin)
 #define SCREEN_ADDRESS 0x3D ///< See datasheet for Address; 0x3D for 128x64, 0x3C for 128x32
-Adafruit_SSD1306 display(SCREEN_WIDTH, SCREEN_HEIGHT, &Wire, OLED_RESET);
+Adafruit_SSD1306 display(SCREEN_WIDTH, SCREEN_HEIGHT, &Wire1, OLED_RESET);
 
 #define NUMFLAKES 10 // Number of snowflakes in the animation example
 
@@ -393,64 +393,63 @@ void setup()
     Serial.begin(9600);
 
     // SSD1306_SWITCHCAPVCC = generate display voltage from 3.3V internally
-    if (!display.begin(SSD1306_SWITCHCAPVCC, SCREEN_ADDRESS))
+    while (!display.begin(SSD1306_SWITCHCAPVCC, SCREEN_ADDRESS))
     {
         Serial.println(F("SSD1306 allocation failed"));
-        for (;;)
-            ; // Don't proceed, loop forever
+        delay(1000);
     }
 
-    // Show initial display buffer contents on the screen --
-    // the library initializes this with an Adafruit splash screen.
-    display.display();
-    delay(2000); // Pause for 2 seconds
+    // // Show initial display buffer contents on the screen --
+    // // the library initializes this with an Adafruit splash screen.
+    // display.display();
+    // delay(2000); // Pause for 2 seconds
 
-    // Clear the buffer
-    display.clearDisplay();
+    // // Clear the buffer
+    // display.clearDisplay();
 
-    // Draw a single pixel in white
-    display.drawPixel(10, 10, SSD1306_WHITE);
+    // // Draw a single pixel in white
+    // display.drawPixel(10, 10, SSD1306_WHITE);
 
-    // Show the display buffer on the screen. You MUST call display() after
-    // drawing commands to make them visible on screen!
-    display.display();
-    delay(2000);
-    // display.display() is NOT necessary after every single drawing command,
-    // unless that's what you want...rather, you can batch up a bunch of
-    // drawing operations and then update the screen all at once by calling
-    // display.display(). These examples demonstrate both approaches...
+    // // Show the display buffer on the screen. You MUST call display() after
+    // // drawing commands to make them visible on screen!
+    // display.display();
+    // delay(2000);
+    // // display.display() is NOT necessary after every single drawing command,
+    // // unless that's what you want...rather, you can batch up a bunch of
+    // // drawing operations and then update the screen all at once by calling
+    // // display.display(). These examples demonstrate both approaches...
 
-    testdrawline(); // Draw many lines
+    // testdrawline(); // Draw many lines
 
-    testdrawrect(); // Draw rectangles (outlines)
+    // testdrawrect(); // Draw rectangles (outlines)
 
-    testfillrect(); // Draw rectangles (filled)
+    // testfillrect(); // Draw rectangles (filled)
 
-    testdrawcircle(); // Draw circles (outlines)
+    // testdrawcircle(); // Draw circles (outlines)
 
-    testfillcircle(); // Draw circles (filled)
+    // testfillcircle(); // Draw circles (filled)
 
-    testdrawroundrect(); // Draw rounded rectangles (outlines)
+    // testdrawroundrect(); // Draw rounded rectangles (outlines)
 
-    testfillroundrect(); // Draw rounded rectangles (filled)
+    // testfillroundrect(); // Draw rounded rectangles (filled)
 
-    testdrawtriangle(); // Draw triangles (outlines)
+    // testdrawtriangle(); // Draw triangles (outlines)
 
-    testfilltriangle(); // Draw triangles (filled)
+    // testfilltriangle(); // Draw triangles (filled)
 
-    testdrawchar(); // Draw characters of the default font
+    // testdrawchar(); // Draw characters of the default font
 
-    testdrawstyles(); // Draw 'stylized' characters
+    // testdrawstyles(); // Draw 'stylized' characters
 
-    testscrolltext(); // Draw scrolling text
+    // testscrolltext(); // Draw scrolling text
 
-    testdrawbitmap(); // Draw a small bitmap image
+    // testdrawbitmap(); // Draw a small bitmap image
 
-    // Invert and restore display, pausing in-between
-    display.invertDisplay(true);
-    delay(1000);
-    display.invertDisplay(false);
-    delay(1000);
+    // // Invert and restore display, pausing in-between
+    // display.invertDisplay(true);
+    // delay(1000);
+    // display.invertDisplay(false);
+    // delay(1000);
 
     testanimate(logo_bmp, LOGO_WIDTH, LOGO_HEIGHT); // Animate bitmaps
 }
